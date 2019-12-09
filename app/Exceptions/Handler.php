@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -34,7 +35,23 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        
+         // Some exceptions don't have a message
+      $exception_message = (!empty($exception->getMessage()) ? trim($exception->getMessage()) : 'App Error Exception');
+
+      // Log message
+      $log_message = "\"" . $exception_message . " in file '" . $exception->getFile() . "' on line '" . $exception->getLine() . "'" . "\"";
+
+      if (!config('app.debug')) {
+          Log::error($log_message);
+      } else {
+          parent::report($exception);
+      }
+        /* if (!config('app.debug')) {
+            Log::error('['.$exception->getCode().'] "'.$exception->getMessage().'" on line '.$exception->getTrace()[0]['line'].' of file '.$exception->getTrace()[0]['file']);
+        } else {
+            parent::report($exception);
+        } */
     }
 
     /**

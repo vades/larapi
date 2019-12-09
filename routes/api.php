@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 /**
  * Authentication
  */
@@ -25,9 +26,6 @@ Route::prefix('auth')->group(function () {
     Route::get('/password/{token}', 'Api\V1\Auth\Password\ConfirmPasswordController');
     Route::post('/password', 'Api\V1\Auth\Password\ForgotPasswordController');
     Route::post('/password/reset', 'Api\V1\Auth\Password\ResetPasswordController');
-    
-
-
 });
 
 
@@ -41,4 +39,3 @@ Route::fallback(function () {
 /* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 }); */
-

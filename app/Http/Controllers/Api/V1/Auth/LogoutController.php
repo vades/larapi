@@ -19,8 +19,7 @@ class LogoutController extends Controller
     {
        
         return response()->json([
-            'message' => __METHOD__,
-            'uuid' =>  \Uuid::v5('ghgh'),
+            'message' => __METHOD__
         ]);
     }
 }

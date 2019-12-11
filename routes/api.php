@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
  */
 Route::prefix('/v1/auth')->group(function () {
     Route::post('/register', 'Api\V1\Auth\Register\CreateUserController');
-    Route::get('/register', 'Api\V1\Auth\Register\ConfirmUserController');
+    Route::get('/register/{token}', 'Api\V1\Auth\Register\ConfirmUserController');
 
     Route::post('/login', 'Api\V1\Auth\LoginController');
     Route::get('/logout', 'Api\V1\Auth\LogoutController');
@@ -31,8 +31,8 @@ Route::prefix('/v1/auth')->group(function () {
 
 Route::fallback(function () {
     return response()->json([
-        'name' => 'Abigail',
-        'state' => 'CA'
+        'status' => 404,
+        'message' => trans('httpstatus.404')
     ]);
 });
 

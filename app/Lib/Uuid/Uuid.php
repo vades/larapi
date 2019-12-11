@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Lib;
+namespace App\Lib\Uuid;
 
 /**
  * The class generates  Universally Unique IDentifiers (UUID) for version 4 and 5.
@@ -156,6 +156,6 @@ class Uuid
      */
     public static function isValidName(string $name)
     {
-        return empty($name);
+       return (empty($name) ? false :true);
     }
 }

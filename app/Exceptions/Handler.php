@@ -63,10 +63,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($request->wantsJson() || $request->ajax()) {   //add Accept: application/json in request
+        return $this->handleApiException($request, $exception);
+        /* if ($request->wantsJson() || $request->ajax()) {   //add Accept: application/json in request
             return $this->handleApiException($request, $exception);
         }
-        return parent::render($request, $exception);
+        return parent::render($request, $exception); */
     }
     /**
      * Handle api response
@@ -80,6 +81,10 @@ class Handler extends ExceptionHandler
     private function handleApiException($request, Exception $exception)
     {
         $exception = $this->prepareException($exception);
+        if ($exception instanceof \Illuminate\Validation\ValidationException) {
+            $exception = $this->convertValidationExceptionToResponse($exception, $request);
+            return $this->customApiValidationResponse($exception);
+        }
 
         if ($exception instanceof \Illuminate\Http\Exception\HttpResponseException) {
             $exception = $exception->getResponse();
@@ -89,11 +94,22 @@ class Handler extends ExceptionHandler
             $exception = $this->unauthenticated($request, $exception);
         }
 
-        if ($exception instanceof \Illuminate\Validation\ValidationException) {
-            $exception = $this->convertValidationExceptionToResponse($exception, $request);
-        }
-
         return $this->customApiResponse($exception);
+    }
+
+     /**
+     * Get response message
+     *
+     * @param int $status_code
+     * @param array $exception
+     * @return  \Illuminate\Http\Response
+     */
+    private function customApiValidationResponse($exception){
+        $response = [];
+        $response['status'] = 422;
+        $response['message'] = $exception->original['message'];
+        $response['errors'] = $exception->original['errors'];
+        return response()->json($response, $response['status']);
     }
     
     /**
@@ -102,7 +118,7 @@ class Handler extends ExceptionHandler
      * @param \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    private function customApiResponse(Exception $exception)
+    private function customApiResponse($exception)
     {
         if (method_exists($exception, 'getStatusCode')) {
             $status_code = $exception->getStatusCode();
@@ -132,20 +148,13 @@ class Handler extends ExceptionHandler
         $response = [];
         $message = ($status_code == 500) ? 'Whoops, looks like something went wrong' : $exception->getMessage();
 
-        switch ($status_code) {
-            // Validation errors
-           case 422:
-                $response['message'] = $exception->original['message'];
-                $response['errors'] = $exception->original['errors'];
-                break;
-            default:
-                if (\Lang::has('httpstatus.'.$status_code)) {
-                    $message = trans('httpstatus.'.$status_code).'. '. $exception->getMessage();
-                } 
-                break;
-        }
+        if (\Lang::has('httpstatus.'.$status_code)) {
+            $message = trans('httpstatus.'.$status_code).'. '. $exception->getMessage();
+        } 
 
         $response['message'] = $message;
         return  $response;
     }
+
+    
 }

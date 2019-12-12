@@ -4,7 +4,7 @@ namespace App\Lib\Uuid;
 
 /**
  * The class generates  Universally Unique IDentifiers (UUID) for version 4 and 5.
- * @author deinmava
+ * @author Martin Vach
  *
  */
 class Uuid

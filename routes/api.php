@@ -17,8 +17,8 @@ use Illuminate\Http\Request;
  * Authentication
  */
 Route::prefix('/v1/auth')->group(function () {
-    Route::post('/user', 'Api\V1\Auth\Register\CreateUserController');
-    Route::get('/user/{token}', 'Api\V1\Auth\Register\ConfirmUserController');
+    Route::post('/user', 'Api\V1\Auth\User\CreateUserController');
+    Route::get('/user/{token}', 'Api\V1\Auth\User\ConfirmUserController');
 
     Route::post('/login', 'Api\V1\Auth\LoginController');
     Route::get('/logout', 'Api\V1\Auth\LogoutController');

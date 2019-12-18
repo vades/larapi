@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Auth\Password;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
+use App\Http\Requests\Auth\ForgotPasswordRequest;
 
 class ForgotPasswordController extends Controller
 {
@@ -13,10 +14,11 @@ class ForgotPasswordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(ForgotPasswordRequest $request)
     {
         return response()->json([
-            'message' => __METHOD__
+            'message' => __METHOD__,
+            'input' =>$request->all()
         ]);
     }
 }

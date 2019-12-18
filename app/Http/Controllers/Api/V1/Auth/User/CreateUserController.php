@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Auth\Password;
+namespace App\Http\Controllers\Api\V1\Auth\User;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\Auth\CreateUserRequest;
 
-class ResetPasswordController extends Controller
+class CreateUserController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -14,7 +14,7 @@ class ResetPasswordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(ResetPasswordRequest $request)
+    public function __invoke(CreateUserRequest $request)
     {
         return response()->json([
             'message' => __METHOD__,

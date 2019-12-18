@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Auth\Register;
+namespace App\Http\Controllers\Api\V1\Auth\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -30,3 +30,4 @@ class ConfirmUserController extends Controller
         ]);
     }
 }
+

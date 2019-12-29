@@ -21,12 +21,25 @@ Route::prefix('/v1/auth')->group(function () {
     Route::get('/user/{token}', 'Api\V1\Auth\User\ConfirmUserController');
 
     Route::post('/login', 'Api\V1\Auth\LoginController');
-    Route::get('/logout', 'Api\V1\Auth\LogoutController');
 
     Route::get('/password/{token}', 'Api\V1\Auth\Password\ConfirmPasswordController');
     Route::post('/password', 'Api\V1\Auth\Password\ForgotPasswordController');
     Route::post('/password/reset', 'Api\V1\Auth\Password\ResetPasswordController');
 });
+
+/**
+ * Admin
+ */
+Route::prefix('/v1/admin')->group(function () {
+    // Auth
+    Route::prefix('auth')->group(function () {
+        Route::get('/logout', 'Api\V1\Admin\Auth\LogoutController');
+        Route::post('/refresh', 'Api\V1\Admin\Auth\RefreshTokenController');
+
+    });
+});
+
+
 
 
 Route::fallback(function () {

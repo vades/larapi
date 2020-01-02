@@ -40,6 +40,12 @@ Route::prefix('/v1/admin')->group(function () {
         Route::put('/', 'Api\V1\Admin\User\UpdateUserController');
     });
 
+     // Settings
+     Route::prefix('settings')->group(function () {
+        Route::get('/', 'Api\V1\Admin\Settings\GetSettingsController');
+        Route::put('/', 'Api\V1\Admin\Settings\UpdateSettingsController');
+    });
+
     // Auth
     Route::prefix('auth')->group(function () {
         Route::get('/logout', 'Api\V1\Admin\Auth\LogoutController');

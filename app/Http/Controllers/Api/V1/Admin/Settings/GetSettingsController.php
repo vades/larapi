@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Auth\User;
+namespace App\Http\Controllers\Api\V1\Admin\Settings;
 
 use App\Http\Controllers\Controller;
-//use Illuminate\Http\Request;
-use App\Http\Requests\Auth\CreateUserRequest as Request;
+use Illuminate\Http\Request;
 
-class CreateUserController extends Controller
+class GetSettingsController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -17,8 +16,7 @@ class CreateUserController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'message' => __METHOD__,
-            'input' =>$request->all()
+            'message' => __METHOD__
         ]);
     }
 }

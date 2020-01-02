@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Auth\User;
+namespace App\Http\Controllers\Api\V1\Admin\Settings;
 
 use App\Http\Controllers\Controller;
 //use Illuminate\Http\Request;
-use App\Http\Requests\Auth\CreateUserRequest as Request;
+use App\Http\Requests\Settings\UpdateSettingsRequest as Request;
 
-class CreateUserController extends Controller
+class UpdateSettingsController extends Controller
 {
     /**
      * Handle the incoming request.

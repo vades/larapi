@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Auth\Password;
 
 use App\Http\Controllers\Controller;
-
-use App\Http\Requests\Auth\ResetPasswordRequest;
+//use Illuminate\Http\Request;
+use App\Http\Requests\Auth\ResetPasswordRequest as Request;
 
 class ResetPasswordController extends Controller
 {
@@ -14,7 +14,7 @@ class ResetPasswordController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(ResetPasswordRequest $request)
+    public function __invoke(Request $request)
     {
         return response()->json([
             'message' => __METHOD__,

@@ -31,11 +31,19 @@ Route::prefix('/v1/auth')->group(function () {
  * Admin
  */
 Route::prefix('/v1/admin')->group(function () {
+    // Dashboard
+    Route::get('/', 'Api\V1\Admin\Dashboard\DashboardController');
+
+    // User
+    Route::prefix('user')->group(function () {
+        Route::get('/', 'Api\V1\Admin\User\GetUserController');
+        Route::put('/', 'Api\V1\Admin\User\UpdateUserController');
+    });
+
     // Auth
     Route::prefix('auth')->group(function () {
         Route::get('/logout', 'Api\V1\Admin\Auth\LogoutController');
         Route::post('/refresh', 'Api\V1\Admin\Auth\RefreshTokenController');
-
     });
 });
 

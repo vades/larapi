@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Admin\Settings;
+namespace App\Http\Controllers\Api\V1\Common\Email;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use App\Http\Requests\Email\SendEmailRequest as Request;
 
-class GetSettingsController extends Controller
+class SendEmailController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -16,7 +17,8 @@ class GetSettingsController extends Controller
     public function __invoke(Request $request)
     {
         return response()->json([
-            'message' => __METHOD__
+            'message' => __METHOD__,
+            'input' =>$request->all()
         ]);
     }
 }

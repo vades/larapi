@@ -178,6 +178,8 @@ return [
          * Custom
          */
         App\Lib\Uuid\UuidServiceProvider::class,
+        App\Lib\Auth\AuthValidateJwtServiceProvider::class,
+        App\Lib\Auth\AuthJwtServiceProvider::class,
 
     ],
 
@@ -234,6 +236,8 @@ return [
          */
 
         'Uuid'   =>  App\Lib\Uuid\UuidFacade::class,
+        'AuthValidateJwt'   =>  App\Lib\Auth\AuthValidateJwtFacade::class,
+        'AuthJwt'   =>  App\Lib\Auth\AuthValidateJwtFacade::class,
 
     ],
 

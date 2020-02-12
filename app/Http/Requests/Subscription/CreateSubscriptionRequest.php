@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Newsletter;
+namespace App\Http\Requests\Subscription;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateNewsletterRequest extends FormRequest
+class CreateSubscriptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class CreateNewsletterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email'
+            'email' => 'required|email',
+            //Rule::unique('subscriptions')
         ];
     }
 }

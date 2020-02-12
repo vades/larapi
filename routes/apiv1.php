@@ -52,8 +52,8 @@ Route::prefix('/admin')->group(function () {
  */
 Route::prefix('/common')->group(function () {
 
-    // Newsletter
-    Route::post('/newsletter', 'Api\V1\Common\Newsletter\CreateNewsletterController');
+    // Subscribe
+    Route::post('/subscribe', 'Api\V1\Common\Subscribtion\CreateSubscribtionController');
 
     // Email
     Route::post('/email', 'Api\V1\Common\Email\SendEmailController');

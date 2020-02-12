@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Subscription;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule; 
 
 class CreateSubscriptionRequest extends FormRequest
 {
@@ -24,8 +25,7 @@ class CreateSubscriptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
-            //Rule::unique('subscriptions')
+            'email' => ['required','email',Rule::unique('subscriptions')]
         ];
     }
 }

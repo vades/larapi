@@ -19,20 +19,23 @@ class CreateSubscribtionController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response()->json([
-            'status' => 422,
-            'message' => trans('httpstatus.422')
-        ],422);
         
-        return response()->json([
-            'message' => __METHOD__,
-            'input' =>$request->all()
-        ]);
-        
-        return response()->json([
-            'status' => 201,
-            'message' => trans('httpstatus.201')
-        ],201);
+
+        try{
+            $subscribtion = new Subscription;
+            $subscribtion->email = $request->email;
+            $subscribtion->type ='voiciqsoon';
+            $subscribtion->ip_address = $request->ip();
+            $subscribtion->save();
+            return response()->json([
+                'status' => 201,
+                'message' => trans('httpstatus.201')
+            ],201);
+         }
+         catch(\Exception $e){
+            // do task when error
+          abort(500, trans('errors.sql'));
+         }
 
        
     }

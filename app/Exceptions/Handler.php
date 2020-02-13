@@ -35,18 +35,18 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        
-         // Some exceptions don't have a message
-      $exception_message = (!empty($exception->getMessage()) ? trim($exception->getMessage()) : 'App Error Exception');
 
-      // Log message
-      $log_message = "\"" . $exception_message . " in file '" . $exception->getFile() . "' on line '" . $exception->getLine() . "'" . "\"";
+        // Some exceptions don't have a message
+        $exception_message = (!empty($exception->getMessage()) ? trim($exception->getMessage()) : 'App Error Exception');
 
-      if (!config('app.debug')) {
-          Log::error($log_message);
-      } else {
-          parent::report($exception);
-      }
+        // Log message
+        $log_message = "\"" . $exception_message . " in file '" . $exception->getFile() . "' on line '" . $exception->getLine() . "'" . "\"";
+
+        if (!config('app.debug')) {
+            Log::error($log_message);
+        } else {
+            parent::report($exception);
+        }
         /* if (!config('app.debug')) {
             Log::error('['.$exception->getCode().'] "'.$exception->getMessage().'" on line '.$exception->getTrace()[0]['line'].' of file '.$exception->getTrace()[0]['file']);
         } else {
@@ -97,21 +97,22 @@ class Handler extends ExceptionHandler
         return $this->customApiResponse($exception);
     }
 
-     /**
+    /**
      * Get response message
      *
      * @param int $status_code
      * @param array $exception
      * @return  \Illuminate\Http\Response
      */
-    private function customApiValidationResponse($exception){
+    private function customApiValidationResponse($exception)
+    {
         $response = [];
         $response['status'] = 422;
         $response['message'] = $exception->original['message'];
         $response['errors'] = $exception->original['errors'];
         return response()->json($response, $response['status']);
     }
-    
+
     /**
      * Handle custom api response
      *
@@ -144,17 +145,21 @@ class Handler extends ExceptionHandler
      * @param Exception $exception
      * @return array
      */
-    private function getMessage($status_code, Exception  $exception) : array{
+    private function getMessage($status_code, Exception  $exception): array
+    {
         $response = [];
         $message = ($status_code == 500) ? 'Whoops, looks like something went wrong' : $exception->getMessage();
 
-        if (\Lang::has('httpstatus.'.$status_code)) {
-            $message = trans('httpstatus.'.$status_code).'. '. $exception->getMessage();
-        } 
+        if (\Lang::has('httpstatus.' . $status_code)) {
+            //$message = trans('httpstatus.'.$status_code).'. '. $exception->getMessage();
+            $message = trans('httpstatus.' . $status_code);
+
+            if (config('app.debug')) {
+                $message .= '. '. $exception->getMessage();
+            }
+        }
 
         $response['message'] = $message;
         return  $response;
     }
-
-    
 }

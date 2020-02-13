@@ -14,6 +14,13 @@ use Illuminate\Http\Request;
 */
 
 /**
+ * Abort all requests without Accept: application/json in the header
+ */
+if (!request()->wantsJson()) {
+   abort(400,'ABORT: Missing Accept: application/json in the header');
+}
+
+/**
  * Authentication
  */
 Route::prefix('/auth')->group(function () {

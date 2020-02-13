@@ -106,10 +106,14 @@ class Handler extends ExceptionHandler
      */
     private function customApiValidationResponse($exception)
     {
+        $message = '';
+        foreach($exception->original['errors'] as $value) {
+            $message .= $value[0];
+        }
         $response = [];
         $response['status'] = 422;
-        $response['message'] = $exception->original['message'];
-        $response['errors'] = $exception->original['errors'];
+        $response['message'] = $message;//$exception->original['message'];
+        //$response['errors'] = $exception->original['errors'];
         return response()->json($response, $response['status']);
     }
 

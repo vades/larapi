@@ -1,13 +1,5 @@
 <?php
 
-define ('JSON_UNESCAPED_SLASHES', 64);
-define ('JSON_UNESCAPED_UNICODE', 0);
-define ('JSON_PRESERVE_ZERO_FRACTION', 0);
-if (!defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
-    //PHP < 7.2 Define it as 0 so it does nothing
-    define('JSON_INVALID_UTF8_SUBSTITUTE', 0);
-}
-
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -19,7 +11,7 @@ if (!defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
 |
 */
 
-$app = require __DIR__.'/../lumen/bootstrap/app.php';
+$app = require __DIR__.'/../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------

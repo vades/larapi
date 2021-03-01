@@ -12,6 +12,11 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json(['Api' => $router->app->version()]);
+    //return $router->app->version();
+});
+
+$router->group(['prefix' => '/v1/common'], function () use ($router) {
+    $router->post('contact/', 'Api\V1\Common\ContactFormController');
 });
 

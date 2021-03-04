@@ -29,7 +29,7 @@ class ContactFormController extends Controller
             });
             return response()->json([
                 'message' =>  __('app.success_email_send'),
-            ]);
+            ],201);
         } catch (\Exception $e) {
             Log::critical($e->getMessage());
             return response()->json([
